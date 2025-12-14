@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.infected_requiem.requiem.repository.MainMapper">
+    <!-- 프로필 불러오기 -->
+    <select id="selectProfile" resultType="com.infected_requiem.requiem.dto.ProfileDTO">
+        SELECT content FROM profile_tbl;
+    </select>
+
+    <!-- 프로필 수정 -->
+    <update id="updateProfile" parameterType="com.infected_requiem.requiem.dto.ProfileDTO">
+        UPDATE profile_tbl SET content = #{content}
+    </update>
+</mapper>

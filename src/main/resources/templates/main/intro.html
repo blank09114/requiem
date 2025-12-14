@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>여우 상담실</title>
+    <link rel="icon" th:href="@{/file/logo/favicon.png}">
+    <link rel="stylesheet" th:href="@{/css/intro.css}">
+    <script th:inline="javascript">
+        window.BGM_PATH_1 = /*[[@{/file/intro/music1.mp3}]]*/ "/file/intro/music1.mp3";
+        window.BGM_PATH_2 = /*[[@{/file/intro/music2.mp3}]]*/ "/file/intro/music2.mp3";
+        window.MAIN_URL = /*[[@{/main}]]*/ "/main";
+    </script>
+    <script th:src="@{/js/intro.js}"></script>
+</head>
+<body>
+    <!-- 인트로 -->
+    <div id="doorScreen"> <div class="doorInner">
+        <button class="door" onclick="enterCounseling()" th:style="|--door-default: url('@{/file/intro/door1.png}'); --door-hover: url('@{/file/intro/door2.png}');|"></button>
+    </div> </div>
+
+    <!-- 1단계 -->
+    <div class="overlay" id="step1">
+        <video class="video" autoplay muted loop playsinline> <source th:src="@{/file/intro/background1.mov}"> </video>
+        <div class="messageBox">
+            <p class="message"></p>
+            <button class="btn">버튼</button>
+        </div>
+    </div>
+
+    <!-- 2단계 -->
+    <div class="overlay" id="step2">
+        <video class="video" autoplay muted loop playsinline> <source th:src="@{/file/intro/background1.mov}"> </video>
+        <div class="messageBox">
+            <p class="message"></p>
+            <button class="btn">버튼</button>
+        </div>
+    </div>
+
+    <!-- 3단계 -->
+    <div class="overlay" id="step3">
+        <video class="video" autoplay muted loop playsinline> <source th:src="@{/file/intro/background1.mov}"> </video>
+        <div class="messageBox">
+            <p class="message">
+                왜거절하시는거죠?제가친절하게권유드리지않았나요?
+                그런말씀을쉽게하시면안되지요.제가드린호의를거절하시면안되지요.
+                다시생각해보세요.다시,다시,다시,다시,다시.
+            </p>
+            <button class="btn">아니오</button>
+        </div>
+    </div>
+
+    <!-- 4단계 -->
+    <div class="overlay" id="step4">
+        <video class="video" autoplay muted loop playsinline> <source th:src="@{/file/intro/background2.mov}"> </video>
+        <div class="messageBox">
+            <p class="message"></p>
+            <button class="btn">버튼</button>
+        </div>
+    </div>
+
+    <!-- 5단계 -->
+    <div class="overlay" id="step5">
+        <video class="video" autoplay muted loop playsinline> <source th:src="@{/file/intro/background2.mov}"> </video>
+        <p class="step5"></p>
+        <div class="messageBox laughTemplate">
+            <p class="message">
+                하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하하
+            </p>
+            <button class="btn">하하</button>
+        </div>
+    </div>
+</body>
+</html>

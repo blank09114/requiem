@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${mode == 'edit'} ? |Requiem - ${post.postTitle} - 수정| : 'Requiem - 게시글 작성'">
+        Requiem - 게시글 작성
+    </title>
+    <link rel="icon" th:href="@{/file/logo/favicon.png}">
+    <link rel="stylesheet" th:href="@{/css/commons.css}">
+    <link rel="stylesheet" th:href="@{/css/board.css}">
+    <script th:src="@{/js/commons.js}"></script>
+    <script th:src="@{/js/board/editor.js}"></script>
+    <script src="https://cdn.tiny.cloud/1/6expd7dcec2w86i0pkry8uc49jb13vpuoweq141ocb18skf4/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+</head>
+<body>
+    <header th:replace="commons :: header"></header>
+
+    <section class="postSection">
+        <form id="postForm" method="post" th:action="${mode == 'edit'} ? @{|/board/${post.postId}/edit|} : @{/board/post}">
+            <div class="postFormHeader">
+                <select id="category" name="tagId">
+                    <option th:each="c : ${categories}" th:value="${c.tagId}" th:text="${c.tagName}" th:selected="${post != null and c.tagId == post.tagId}">
+                    </option>
+                </select>
+                <input id="postTitle" name="postTitle" type="text" placeholder="제목" th:value="${post != null ? post.postTitle : ''}">
+            </div>
+            <textarea id="postFormContent" name="postContent" th:text="${post != null ? post.postContent : ''}"></textarea>
+            <button type="submit" class="btn purple postFormBtn" th:text="${mode == 'edit'} ? '수정' : '등록'">등록</button>
+        </form>
+    </section>
+
+    <nav th:replace="commons :: nav"></nav>
+
+    <footer th:replace="commons :: footer"></footer>
+
+    <div th:replace="commons :: toast"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () =>
+        {
+            const textarea = document.getElementById('postFormContent');
+            const form = document.getElementById('postForm');
+            const titleInput = document.getElementById('postTitle');
+
+            EditorUtil.initEditor(textarea, { height: 400 });
+
+            form.addEventListener('submit', (e) =>
+            {
+                if (typeof tinymce !== 'undefined') tinymce.triggerSave();
+
+                const title = titleInput.value.trim();
+                const content = textarea.value.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, '').trim();
+
+                if (!title)
+                { e.preventDefault(); showToast('제목을 입력해주세요.'); titleInput.focus(); return; }
+                if (!content)
+                {  e.preventDefault(); showToast('내용을 입력해주세요.'); return; }
+            });
+        });
+    </script>
+</body>
+</html>

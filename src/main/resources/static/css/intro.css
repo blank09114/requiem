@@ -1,0 +1,333 @@
+/* 전체 서식 */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family: 'Pretendard Variable';
+
+    transition: all 0.5s ease;
+}
+html, body { height: 100%; }
+body { background-color: #000; overflow: hidden; }
+
+/* 인트로 */
+#doorScreen
+{
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+
+    background-color: #F3EFEA;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+.doorInner
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.door
+{
+    width: 320px;
+    height: 480px;
+
+    border: none;
+    background-color: transparent;
+    background-image: var(--door-default);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    cursor: pointer;
+}
+.door:hover { background-image: var(--door-hover); }
+
+/* 공통 배경 */
+.overlay
+{
+    width: 100%;
+    height: 100%;
+
+    position: fixed;
+    inset: 0;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+.video
+{
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* 1~3단계 배경 */
+#step1, #step2, #step3
+{
+    z-index: 7;
+    overflow: hidden;
+    background-color: #000;
+    position: fixed;
+}
+#step1 .video, #step2 .video, #step3 .video
+{
+    object-fit: cover;
+    object-position: 50% 70%;
+}
+
+/* 3단계 글리치 */
+#step3 .video
+{
+    filter: brightness(0.45) contrast(1.5) saturate(1.8) hue-rotate(-30deg) blur(1.5px);
+    transition: filter 0.6s ease;
+}
+#step3[data-state="active"] .video { animation: vidGlitch 0.25s steps(2, end) infinite; }
+@keyframes vidGlitch
+{ 0% { transform: translate(0,0); } 50% { transform: translate(-2px, 1px); } 100% { transform: translate(1px, -1px); } }
+
+/* 4~5단계 오버레이 */
+#step4, #step5
+{
+    position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+#step4::before, #step5::before
+{
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    background:
+        radial-gradient(circle at center, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.9) 80%),
+        repeating-linear-gradient(
+            0deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.06) 1px,
+            transparent 1px, transparent 3px
+        );
+    opacity: 0;
+    mix-blend-mode: soft-light;
+    transition: opacity 0.7s ease;
+}
+#step4[data-state="active"]::before, #step5[data-state="active"]::before { opacity: 0.9; }
+
+/* 공통 메시지 박스 */
+.messageBox, .step5 { position: relative; z-index: 2; }
+.messageBox.clone { position: absolute; display: flex; }
+.messageBox
+{
+    position: relative;
+    width: 420px;
+    max-width: 80%;
+    min-height: 160px;
+    padding: 40px 24px 48px 24px;
+
+    border: 2px solid #000000;
+    background-color: #C0C0C0;
+    box-shadow: 4px 4px 0 #000000;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+    z-index: 1;
+
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+}
+.messageBox::before
+{
+    height: 26px;
+    padding-left: 8px;
+
+    content: "여우 상담실";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+
+    background: #0A3ACC;
+
+    color: #FFFFFF;
+    font-size: 14px;
+    line-height: 26px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.messageBox::after
+{
+    width: 18px;
+    height: 18px;
+
+    content: "X";
+    position: absolute;
+    top: 3px;
+    right: 8px;
+
+    border: 1px solid #000000;
+    background-color: #C00000;
+
+    font-size: 11px;
+    text-align: center;
+    line-height: 18px;
+    color: #FFFFFF;
+}
+
+/* 등장 애니메이션 */
+.overlay[data-state="active"] .messageBox { animation: floatIn 0.45s ease-out forwards; }
+@keyframes floatIn
+{
+    0%
+    {
+        transform: translateY(16px) scale(0.95);
+        opacity: 0;
+        filter: blur(3px);
+    }
+    60%
+    {
+        transform: translateY(-2px) scale(1.01);
+        opacity: 1;
+        filter: blur(0);
+    }
+    100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* 메시지 영역 */
+.message
+{
+    width: 100%;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* 단계별 배경 */
+#step1 .messageBox { background-color: #D7D7D7; }
+#step2 .messageBox { background-color: #C8C8C8; }
+#step3 .messageBox { background-color: #A8A8A8; }
+#step3 .messageBox, #step3 .messageBox.clone { max-width: none; }
+
+/* 4단계 */
+#step4 .messageBox
+{
+    border-color: #7A2D3A;
+    background-color: #333333;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.7);
+    color: #E7E7E7;
+}
+#step4 .messageBox::before { background: #7A2D3A; }
+#step4 .messageBox::before, #step5 .messageBox::before { content: "여¿ 상■£?"; }
+
+/* 3단계 텍스트 글리치 */
+#step3 .message { white-space: pre-line; letter-spacing: 0.03em; }
+#step3[data-state="active"] .message { animation: textGlitch 0.4s steps(2, end) 5; }
+@keyframes textGlitch
+{
+    0% { transform: translate(0,0); text-shadow: 1px 0 #7A2D3A, -1px 0 #5B3A7A; }
+    20% { transform: translate(-1px,-1px); text-shadow: 3px 0 #A0444F, -2px 0 #7A4FA3; }
+    40% { transform: translate(1px,1px); text-shadow: -2px 0 #C35A66, 2px 0 #9F72C3; }
+    60% { transform: translate(-1px,0); text-shadow: 2px 0 #7A2D3A, -1px 0 #5B3A7A; }
+    80% { transform: translate(1px,-1px); text-shadow: -3px 0 #A0444F, 3px 0 #7A4FA3; }
+    100% { transform: translate(0,0); text-shadow: none; }
+}
+
+/* 버튼 공통 */
+.btn
+{
+    width: 80px;
+    height: 30px;
+
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+
+    border: 2px solid #000000;
+    background-color: #E0E0E0;
+    font-size: 13px;
+
+    cursor: pointer;
+}
+.btn:hover { background-color: #C8C8C8; }
+
+/* 5단계 */
+.step5
+{
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+
+    display: block;
+    overflow: hidden;
+
+    color: #E7E7E7;
+    font-size: 10px;
+    line-height: 1.1;
+
+    white-space: pre-wrap;
+    word-break: break-all;
+
+    column-width: 18px;
+    column-gap: 0;
+
+    opacity: 0;
+    animation: glitch 0.25s infinite;
+}
+.laughPopup { max-width: none; }
+.step5.visible { opacity: 1; }
+@keyframes glitch
+{
+    0% { text-shadow: 2px 0 #7A2D3A, -2px 0 #5B3A7A; }
+    20% { text-shadow: -3px 0 #A0444F, 3px 0 #7A4FA3; }
+    40% { text-shadow: 2px 0 #C35A66, -2px 0 #9F72C3; }
+    60% { text-shadow: -1px 0 #A0444F, 1px 0 #7A2D3A; }
+    80% { text-shadow: 3px 0 #7A4FA3, -3px 0 #5B3A7A; }
+    100% { text-shadow: none; }
+}
+/* 팝업 */
+.laughTemplate .message
+{
+    font-size: 12px;
+    line-height: 1.1;
+    white-space: pre-wrap;
+    word-break: break-all;
+    padding-right: 8px;
+}
+.laughTemplate .btn { display: none; }
+
+/* 섬광 */
+.flash { animation: flashCut 0.35s ease-in; }
+@keyframes flashCut
+{
+    0% { filter: brightness(1); }
+    40% { filter: brightness(4); }
+    100% { filter: brightness(0.1); }
+}

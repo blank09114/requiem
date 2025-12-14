@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requiem</title>
+    <link rel="icon" th:href="@{/file/logo/favicon.png}">
+    <link rel="stylesheet" th:href="@{/css/commons.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/board.css}">
+    <script th:src="@{/js/commons.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+</head>
+<body>
+    <header th:replace="commons :: header"></header>
+
+    <section class="postSection">
+        <div class="blind" onclick="removeBlind()"> 클릭하여 프로필 열람 </div>
+        <div class="postHeader">
+            <h1 class="title1Text left">박소율</h1>
+            <div class="postBtnsWrap" sec:authorize="hasRole('ADMIN')"> <a th:href="@{/profileEdit}" class="btn purple">편집</a> </div>
+        </div>
+        <div class="index"></div>
+        <div class="profile" th:utext="${profile.content}"></div>
+    </section>
+
+    <nav th:replace="commons :: nav"></nav>
+
+    <footer th:replace="commons :: footer"></footer>
+
+    <div th:replace="commons :: toast"></div>
+</body>
+</html>

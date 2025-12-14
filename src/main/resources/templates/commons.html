@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <header th:fragment="header">
+    <div class="container">
+      <div class="headerLeft">
+        <a class="toMain" th:href="@{/main}" th:style="|--logo-default: url('@{/file/logo/logo.png}'); --logo-hover: url('@{/file/logo/logo_hover.png}');|"></a>
+        <div class="menuWrap">
+          <a class="title2Text" th:href="@{/board/}" th:classappend="${activeMenu == 'board'} ? ' now'">
+            LOG
+          </a>
+          <a class="title2Text" th:href="@{/gallery}" th:classappend="${activeMenu == 'gallery'} ? ' now'">
+            GALLERY
+          </a>
+          <a class="title2Text" th:href="@{/guestbook}" th:classappend="${activeMenu == 'guestbook'} ? ' now'">
+            GUESTBOOK
+          </a>
+        </div>
+      </div>
+      <a class="btn red" th:href="@{/login}" sec:authorize="isAnonymous()"> LOG IN </a>
+      <a class="btn red" href="javascript:void(0)" onclick="logout()" sec:authorize="isAuthenticated()"> LOG OUT </a>
+    </div>
+  </header>
+
+  <footer th:fragment="footer">
+    <div class="container">
+      <div class="footerTop">
+        <a class="toMain" th:href="@{/main}" th:style="|--logo-default: url('@{/file/logo/logo.png}'); --logo-hover: url('@{/file/logo/logo_hover.png}');|"></a>
+        <div class="soundPlayer">
+          <p class="text3">Abyssopelagic <span class="ton3">- @biggumin</span></p>
+          <div class="playBar">
+            <audio id="bgmAudio" th:src="@{/file/bgm.mp3}" preload="auto" loop></audio>
+            <button class="playBtn" type="button">▶</button>
+            <div class="playProgressWrap"> <div class="playProgress"></div> </div>
+            <p id="bgmTime" class="text3 ton3 center">00:00 / 00:00</p>
+          </div>
+        </div>
+      </div>
+      <p class="text2">
+        <a th:href="@{/board/1}"><strong>개인정보 처리방침↗</strong></a><br><br>
+        <strong>COPYRIGHT</strong> © infected-requiem.com. All rights reserved. <br>
+        <strong>DESIGN/DEV</strong> <a href="https://crepe.cm/@blank0914" target="_blank">공백↗</a> <br>
+        <strong>INTRO BGM</strong> When You Say Nothing At All
+        <span class="ton3">- License Verified by SoundApply</span> <br>
+        <strong>ORIGINAL</strong>
+        <a href="https://page.kakao.com/content/65171279" target="_blank">괴담에 떨어져도 출근을 해야 하는구나↗</a>
+      </p>
+    </div>
+  </footer>
+
+  <nav th:fragment="nav">
+    <button class="navBtn" onclick="scrollMov('top')">↑</button>
+    <button class="navBtn" onclick="scrollMov('bottom')">↓</button>
+  </nav>
+
+  <div class="toast" th:fragment="toast">
+    <div class="toastContent">
+      <span class="text3"></span>
+      <button class="toastBtn" onclick="closeToast()">×</button>
+    </div>
+  </div>
+
+  <div class="pages" th:fragment="pages">
+    <a class="page"> < </a>
+    <a class="page"> > </a>
+  </div>
+</html>

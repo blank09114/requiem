@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requiem - 회원가입</title>
+    <link rel="icon" th:href="@{/file/logo/favicon.png}">
+    <link rel="stylesheet" th:href="@{/css/commons.css}">
+    <link rel="stylesheet" th:href="@{/css/user.css}">
+    <script th:src="@{/js/commons.js}"></script>
+    <script th:src="@{/js/user.js}"></script>
+</head>
+<body>
+    <header th:replace="commons :: header"></header>
+
+    <section class="userSection">
+        <form class="userForm" id="loginForm">
+            <h1 class="loginFormHeader title1Text">JOIN</h1>
+            <div class="inputsWrap">
+                <div class="inputWrap">
+                    <p class="text2"><strong>닉네임</strong></p>
+                    <input type="text" id="nameInput" placeholder="2~10자">
+                </div>
+                <div class="inputWrap">
+                    <p class="text2"><strong>ID</strong></p>
+                    <div class="idWrap">
+                        <input type="text" id="idInput" placeholder="영문 혹은 영문+숫자, 4~20자" oninput="resetIdCheck()">
+                        <button class="btn purple" type="button" onclick="idUsingCheck()">중복확인</button>
+                    </div>
+                    <p class="text3 okText" style="display: none;">사용 가능한 ID입니다.</p>
+                    <p class="text3 noText" style="display: none;">이미 사용 중인 ID입니다.</p>
+                </div>
+                <div class="inputWrap">
+                    <p class="text2"><strong>PW</strong></p>
+                    <input type="password" id="pwInput" placeholder="영문+숫자, 8~40자">
+                    <input type="password" id="pwCheckInput" placeholder="PW 확인">
+                </div>
+                <label class="agree"> <input type="checkbox" id="agree"> <span class="text2"><a th:href="@{/board/1}" target="_blank">개인정보 처리방침↗</a> 동의</span> </label>
+                <button class="btn purple" type="button" onclick="join()">회원가입</button>
+            </div>
+        </form>
+    </section>
+
+    <nav th:replace="commons :: nav"></nav>
+
+    <footer th:replace="commons :: footer"></footer>
+
+    <div th:replace="commons :: toast"></div>
+</body>
+</html>

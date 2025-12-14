@@ -1,0 +1,78 @@
+/* 섹션 */
+.userSection
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 폼 */
+.userForm
+{
+    width: 600px;
+    max-width: 100%;
+    border-radius: 8px;
+
+    border: 1px solid #5B3A7A;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.loginFormHeader
+{
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+    
+    background-color: #5B3A7A;
+}
+.joinLink
+{
+    width: 100%;
+    border-top: 1px solid #5B3A7A;
+}
+
+/* 인풋 요소 */
+.inputsWrap
+{
+    width: 100%;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.inputWrap
+{
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* ID */
+.idWrap
+{
+    width: 100%;
+
+    display: flex;
+    gap: 10px;
+}
+.idWrap input { width: 100%; }
+.idWrap .btn { flex-shrink: 0; }
+.okText { color: #7A4FA3; }
+.noText { color: #A0444F; }
+
+/* 개인정보 처리방침 */
+.agree
+{
+    width: 100%;
+    height: 24px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+    cursor: pointer;;
+}

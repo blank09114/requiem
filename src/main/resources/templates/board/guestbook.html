@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requiem - 방명록</title>
+    <link rel="icon" th:href="@{/file/logo/favicon.png}">
+    <link rel="stylesheet" th:href="@{/css/commons.css}">
+    <link rel="stylesheet" th:href="@{/css/board.css}">
+    <script th:src="@{/js/commons.js}"></script>
+    <script th:inline="javascript">
+        window.IS_ADMIN = /*[[${#authorization.expression('hasRole(''ADMIN'')')}]]*/ false;
+        window.CURRENT_USER_ID = /*[[${#authentication?.name}]]*/ null;
+    </script>
+    <script th:src="@{/js/board/guestbook.js}"></script>
+    <script th:src="@{/js/board/paging.js}"></script>
+</head>
+<body>
+    <header th:replace="commons :: header"></header>
+
+    <section>
+        <h1 class="title1Text">GUESTBOOK</h1>
+        <div class="guestbookForm" sec:authorize="isAuthenticated()">
+            <form class="guestbookForm" id="submitGuestbookForm">
+                <div class="formHeader">
+                    <h2 class="text1 left">방명록 작성하기</h2>
+                    <div class="formHeaderLeft">
+                        <label class="secret"> <input type="checkbox" id="guestbookSecret"> 비밀글 </label>
+                        <button class="btn purple" type="button" onclick="submitGuestbook()">등록</button>
+                    </div>
+                </div>
+                <textarea class="formContent" id="guestbook" placeholder="등록 후 수정 또는 삭제가 불가합니다."></textarea>
+            </form>
+        </div>
+        <h2 class="text2 center">◆　◆　◆</h2>
+        <div class="guestbookList"></div>
+        <div th:replace="commons :: pages"></div>
+    </section>
+
+    <nav th:replace="commons :: nav"></nav>
+
+    <footer th:replace="commons :: footer"></footer>
+
+    <div th:replace="commons :: toast"></div>
+</body>
+</html>

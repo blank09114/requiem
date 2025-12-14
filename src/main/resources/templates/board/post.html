@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="|Requiem - ${post.postTitle}|">Requiem</title>
+    <link rel="icon" th:href="@{/file/logo/favicon.png}">
+    <link rel="stylesheet" th:href="@{/css/commons.css}">
+    <link rel="stylesheet" th:href="@{/css/board.css}">
+    <script th:src="@{/js/commons.js}"></script>
+</head>
+<body>
+    <header th:replace="commons :: header"></header>
+
+    <section class="postSection">
+        <div class="postHeader">
+            <h1 class="title1Text left" th:text="${post.postTitle}"></h1>
+            <p class="text2 ton3" th:text="${#temporals.format(post.postDate, 'yyyy.MM.dd.')}"></p>
+            <div class="postBtnsWrap" sec:authorize="hasRole('ADMIN')">
+                <a class="btn purple" th:href="@{|/board/${post.postId}/edit|}">수정</a>
+                <form th:action="@{|/board/${post.postId}/delete|}" method="post" style="display:inline;">
+                    <button type="submit" class="btn red" onclick="return confirm('정말 삭제할까요?');">삭제</button>
+                </form>
+            </div>
+        </div>
+        <div class="postContent" th:utext="${post.postContent}">본문</div>
+    </section>
+
+    <nav th:replace="commons :: nav"></nav>
+
+    <footer th:replace="commons :: footer"></footer>
+
+    <div th:replace="commons :: toast"></div>
+</body>
+</html>

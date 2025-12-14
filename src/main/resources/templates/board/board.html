@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requiem - 게시판</title>
+    <link rel="icon" th:href="@{/file/logo/favicon.png}">
+    <link rel="stylesheet" th:href="@{/css/commons.css}">
+    <link rel="stylesheet" th:href="@{/css/board.css}">
+    <script th:src="@{/js/commons.js}"></script>
+    <script th:src="@{/js/board/paging.js}"></script>
+    <script th:src="@{/js/board/board.js}"></script>
+</head>
+<body>
+    <header th:replace="commons :: header"></header>
+
+    <section>
+        <div class="boardHeader">
+            <h1 class="title1Text">LOG</h1>
+            <div class="categories">
+                <a class="text2 ton3 category now">· 전체 보기</a>
+                <a class="text2 ton3 category"
+                   th:each="c : ${categories}" th:text="|· ${c.tagName}|" th:attr="data-tag-id=${c.tagId}">
+                </a>
+                <button class="text2 ton3 category" onclick="toggleCategoryForm()" sec:authorize="hasRole('ADMIN')">· 카테고리 편집</button>
+            </div>
+            <div class="categoryFormsWrap" style="display: none;" sec:authorize="hasRole('ADMIN')">
+                <form class="categoryForm" id="addCategoryForm">
+                    <input type="text" id="addCategoryInput" placeholder="추가할 카테고리 입력">
+                    <button class="btn purple" onclick="addCategory(event)">카테고리 추가</button>
+                </form>
+                <form class="categoryForm" id="deleteCategoryForm">
+                    <input type="text" id="deleteCategoryInput" placeholder="제거할 카테고리 입력">
+                    <button class="btn purple" onclick="deleteCategory(event)">카테고리 제거</button>
+                </form>
+            </div>
+            <a class="btn purple" th:href="@{/board/postForm}" sec:authorize="hasRole('ADMIN')">글쓰기</a>
+        </div>
+        <div class="boardSection"> <div class="postList"></div> </div>
+        <div th:replace="commons :: pages"></div>
+    </section>
+
+    <nav th:replace="commons :: nav"></nav>
+
+    <footer th:replace="commons :: footer"></footer>
+
+    <div th:replace="commons :: toast"></div>
+</body>
+</html>

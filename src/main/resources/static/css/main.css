@@ -1,0 +1,120 @@
+/* 메인 페이지 */
+/* 목차 */
+.index
+{
+    width: 100%;
+    padding: 10px;
+
+    border: 1px solid #8E8E95;
+}
+.index .text1 { margin-bottom: 5px; }
+.indexBtn { color: #7A4FA3; font-weight: bold; }
+.in1 { padding-left: 10px; }
+.in2 { padding-left: 20px; }
+
+/* 프로필 */
+.profile { width: 100%; }
+.profile .title1Text, .profile .title2Text, .profile .text1
+{
+    margin-bottom: 10px;
+    border-bottom: 1px solid #8E8E95;
+}
+.profileText ul, .profileText ol { padding-left: 40px; }
+.profileText img{ max-width: 90%; height: auto; display: block; }
+.profileText { display: flow-root; }
+
+/* 프로필 편집 */
+.edit
+{
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 요소 입력 */
+.elementWrap
+{
+    width: 100%;
+    position: relative;
+}
+.titleForm, textarea[name="textForm"]
+{
+    width: 100%;
+    padding: 5px;
+
+    outline: none;
+    border: none;
+    background: none;
+}
+.titleForm { font-weight: bold; }
+.elementWrap input, .elementWrap input:hover, .elementWrap input:focus, .elementWrap textarea
+{ border: none; color: #E7E7E7; }
+input[name="title1Form"] { font-size: 30px; }
+input[name="title2Form"] { font-size: 24px; }
+input[name="title3Form"] { font-size: 20px; }
+textarea[name="textForm"] { min-height: 200px; }
+
+/* 요소 위치 수정 */
+.elementBtnsWrap
+{
+    position: absolute;
+    top: 5px;
+    right: 0;
+    z-index: 5;
+
+    display: flex;
+    gap: 5px;
+}
+.elementBtn
+{
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+
+    border: none;
+    background: none;
+
+    font-size: 16px;
+    line-height: 24px;
+
+    cursor: pointer;
+}
+.elementBtn:hover { background-color: #9F72C3; }
+
+/* 요소 추가 */
+.btnsWrap
+{
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+}
+.addBtn
+{
+    width: 100%;
+    height: 30px;
+
+    border: 1px solid #8E8E95;
+    background: none;
+
+    font-size: 16px;
+    line-height: 30px;
+
+    cursor: pointer;
+}
+.addBtn:hover { background-color: #8E8E95; color: #7A4FA3; }
+
+/* 모바일 */
+@media(max-width: 768px)
+{
+    .addBtn
+    {
+        height: 24px;
+        font-size: 14px;
+        line-height: 24px;
+    }
+}

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infected_requiem.requiem.repository.GalleryMapper">
+    <!-- 이미지 등록 -->
+    <insert id="insertGallery" parameterType="com.infected_requiem.requiem.dto.GalleryDTO" useGeneratedKeys="true" keyProperty="imgId">
+        INSERT INTO gallery_tbl (img_url, img_name, img_artist)
+        VALUES (#{imgUrl}, #{imgName}, #{imgArtist})
+    </insert>
+
+    <!-- 카운팅 -->
+    <select id="countGallery" resultType="int"> SELECT COUNT(*) FROM gallery_tbl </select>
+
+    <!-- 이미지 조회 -->
+    <select id="selectGalleryPage" resultType="com.infected_requiem.requiem.dto.GalleryDTO">
+        SELECT
+            img_id AS imgId,
+            img_url AS imgUrl,
+            img_name AS imgName,
+            img_artist AS imgArtist,
+            img_date AS imgDate
+        FROM gallery_tbl
+        ORDER BY img_date DESC, img_id DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <!-- 이미지 url 조회 -->
+    <select id="selectImgUrlById" resultType="string">
+        SELECT img_url FROM gallery_tbl WHERE img_id = #{imgId}
+    </select>
+
+    <!-- 이미지 삭제 -->
+    <delete id="deleteGallery"> DELETE FROM gallery_tbl WHERE img_id = #{imgId} </delete>
+</mapper>

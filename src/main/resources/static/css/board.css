@@ -1,0 +1,392 @@
+/* 게시판 */
+.boardHeader, .boardSection
+{
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* 카테고리 */
+.categories
+{
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px 30px;
+    flex-wrap: wrap;
+}
+.category
+{
+    width: auto;
+
+    border: none;
+    background: none;
+
+    text-decoration: none !important;
+
+    cursor: pointer;
+}
+.category:hover, .category.now { color: #7A4FA3; font-weight: bold; }
+
+/* 카테고리 폼 */
+.categoryFormsWrap
+{
+    width: 100%;
+
+    display: flex;
+    gap: 30px;
+}
+.categoryForm
+{
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 게시글 목록 */
+.postList
+{
+    width: 100%;
+}
+.postItem
+{
+    width: 100%;
+    padding: 10px;
+
+    border-top: 1px solid #5B3A7A;
+
+    text-decoration: none !important;
+
+    display: flex;
+    flex-direction: column;
+}
+.postItem:last-child { border-bottom: 1px solid #5B3A7A; }
+.postItem:hover { background-color: #111113; }
+
+/* 페이지 */
+.pages
+{
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.page
+{
+    width: 30px;
+    height: 30px;
+
+    font-size: 16px;
+    text-align: center;
+    line-height: 30px;
+    text-decoration: none !important;
+}
+.page:hover, .page.now { border-radius: 50%; background-color: #5B3A7A; }
+
+
+
+/* 게시글 섹션 */
+.postSection
+{
+    padding: 20px;
+    border-radius: 8px;
+
+    border: 1px solid #5B3A7A;
+    background-color: #111113;
+
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    position: relative;
+}
+.blind
+{
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    border-radius: 8px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+
+    background-color: #111113;
+
+    font-size: 20px;
+    text-align: center;
+    color: #7A4FA3;
+
+    cursor: pointer;
+}
+.blind:hover { background-color: rgba(17, 17, 19, 0.9); }
+
+/* 섹션 헤더 */
+.postHeader
+{
+    width: 100%;
+    position: relative;
+}
+.postHeader .title1Text { width: 80%; }
+.postBtnsWrap
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    display: flex;
+    gap: 10px;
+}
+
+/* 게시글 본문 */
+.postContent { width: 100%; }
+.postContent img { max-width: 90%; height: auto; display: block; }
+.postSection ul, postSection ol { padding-left: 40px; }
+
+
+
+/* 게시글 작성 폼 */
+#postForm
+{
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.postFormHeader
+{
+    width: 100%;
+    padding-bottom: 5px;
+
+    border-bottom: 1px solid #7A4FA3;
+
+    display: flex;
+    gap: 10px;
+}
+#category { width: 150px; }
+#postTitle { width: 100%; }
+#postFormContent
+{
+    width: 100%;
+    padding: 10px;
+    min-height: 300px;
+}
+.postFormBtn { align-self: flex-end; }
+
+
+
+/* 이미지 등록 */
+#imgForm
+{
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 갤러리 */
+.pictureList
+{
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+.pictureItem
+{
+    width: 100%;
+    aspect-ratio: 16/9;
+    
+    border: 1px solid #8E8E95;
+    background: none;
+
+    position: relative;
+    display: block;
+
+    cursor: pointer;
+    overflow: hidden;
+}
+.pictureItem:hover { border: 1px solid #5B3A7A; background-color: #111113; }
+
+/* 이미지 */
+.picture
+{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+
+    display: block;
+}
+
+/* 이미지 설명 */
+.pictureInfo
+{
+    width: 100%;
+    padding: 10px;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    background-color: rgba(255, 255, 255, 0.5);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.pictureInfo span { color: #0A0A0A; }
+.pictureItem:hover .pictureInfo { background-color: rgba(91, 58, 122, 0.5); }
+.pictureItem:hover .pictureInfo span { color: #E7E7E7; }
+
+/* 이미지 삭제 */
+.pictureItem .btn
+{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+/* 이미지 확대 모달 */
+.modalOverlay
+{
+    width: 100%;
+    height: 100%;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.imgModal { max-width: 100%; max-height: 100%; }
+
+
+
+/* 방명록 폼 */
+.guestbookForm
+{
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 폼 헤더 */
+.formHeader
+{
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.formHeader .text1 { width: auto; }
+.formHeaderLeft
+{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.secret
+{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    cursor: pointer;
+}
+
+/* 폼 텍스트 영역 */
+.formContent
+{
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+}
+
+/* 방명록 */
+.guestbookList
+{
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.guestbookItem
+{
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 말풍선 */
+.guestbook
+{
+    width: 80%;
+    padding: 10px;
+    
+    background-color: rgba(91, 58, 122, 0.3);
+
+    position: relative;
+}
+.guestbookItem > .guestbook:last-of-type { border-radius: 8px 8px 0 8px; align-self: flex-end; }
+.guestbookItem > .guestbook:first-of-type { border-radius: 8px 8px 8px 0; align-self: flex-start; }
+
+/* 말풍선 요소 */
+.guestbook .text2 { min-height: 50px; }
+.guestbook:first-child .text2 {  margin-top: 5px; }
+.guestbookBtnsWrap
+{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    display: flex;
+    gap: 10px;
+}
+
+
+
+/* 모바일 */
+@media(max-width: 768px)
+{
+    /* 게시판 */
+    .categoryFormsWrap { flex-direction: column; gap: 10px; }
+    .boardHeader, .boardSection { gap: 10px; }
+
+    /* 게시글 */
+    .postSection, #postForm { gap: 10px; }
+    .postBtnsWrap { flex-direction: column; }
+
+    /* 갤러리 */
+    .pictureList
+    {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .guestbookItem > .guestbook:first-of-type .guestbookBtnsWrap
+    {
+        position: static;
+        justify-content: flex-end;
+    }
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requiem - 프로필 수정</title>
+    <link rel="icon" th:href="@{/file/logo/favicon.png}">
+    <link rel="stylesheet" th:href="@{/css/commons.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/board.css}">
+    <script th:src="@{/js/commons.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+    <script th:src="@{/js/board/editor.js}"></script>
+    <script src="https://cdn.tiny.cloud/1/6expd7dcec2w86i0pkry8uc49jb13vpuoweq141ocb18skf4/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+</head>
+<body>
+    <header th:replace="commons :: header"></header>
+
+    <section class="postSection">
+        <div class="postHeader"> <h1 class="title1Text left">프로필 편집</h1> </div>
+        <div id="profileRaw" th:utext="${profile.content}" style="display:none;"></div>
+        <form class="edit" method="post" action="/profileEdit" onsubmit="return beforeSubmit();">
+            <div class="btnsWrap">
+                <button type="button" class="addBtn" onclick="addElement('title1')">제목 1 추가</button>
+                <button type="button" class="addBtn" onclick="addElement('title2')">제목 2 추가</button>
+                <button type="button" class="addBtn" onclick="addElement('title3')">제목 3 추가</button>
+                <button type="button" class="addBtn" onclick="addElement('text')">본문 추가</button>
+            </div>
+            <input type="hidden" name="content" id="profileContent">
+            <button type="submit" class="btn purple">등록</button>
+        </form>
+    </section>
+
+    <nav th:replace="commons :: nav"></nav>
+
+    <footer th:replace="commons :: footer"></footer>
+
+    <div th:replace="commons :: toast"></div>
+</body>
+</html>

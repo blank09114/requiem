@@ -1,0 +1,7 @@
+*
+!.gitignore
+!src/
+src/*
+!src/main/
+!src/main/**
+src/main/resources/application.properties
