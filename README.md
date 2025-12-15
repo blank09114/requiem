@@ -1,8 +1,7 @@
 # Requiem
 
-**Requiem**은 **개인 창작물을 기록하고 정리하기 위한  웹 애플리케이션**입니다.  
+**Requiem**은 **개인 창작물을 기록하고 정리하기 위한  웹 애플리케이션**입니다. 캐릭터 프로필, 글, 이미지, 방명록 등 창작 활동 전반을 한 공간에 모아 제공합니다.
 
-캐릭터 프로필, 글, 이미지, 방명록 등 창작 활동 전반을 한 공간에 모아 제공합니다.
 🔗 [배포 주소](https://infected-requiem.com/)
 
 
@@ -10,7 +9,7 @@
 
 ## 📌 프로젝트 개요
 - **개발 형태**: Spring Boot 기반 웹 애플리케이션(MVC 구조)
-- **개발 인원**: 1인(외주 단독 개발)
+- **개발 인원**: 1인(외주 프로젝트 - 기획, 디자인, 개발, 배포 전 과정 단독 수행)
 - **프로젝트 성격**: 개인 창작물 아카이빙 & 포트폴리오 사이트
 - **핵심 목표**
   - 개인 창작물(글·이미지)의 체계적 기록 및 관리
@@ -75,11 +74,20 @@
 ## 📁 디렉터리 구조
 ```
 infected-requiem/
-├── src/
-│   └── main/
-│       ├── java/           # Controller, Service, Config
-│       └── resources/
-│           ├── templates/  # Thymeleaf
-│           ├── static/     # CSS, JS, images
-│           └── mapper/     # MyBatis XML
+├── src/main/
+│   ├── java/com/infected_requiem/requiem/
+│   │   ├── api/ # REST API
+│   │   ├── controller/ # Thymeleaf View 렌더링용 MVC Controller
+│   │   ├── service/ # 비즈니스 로직
+│   │   ├── repository/ # MyBatis Mapper Interface
+│   │   ├── dto/ # 계층 간 데이터 전달용 DTO
+│   │   ├── config/ # Security, JWT, Web 설정
+│   │   └── RequiemApplication.java # 실행 파일 
+│   └── resources/
+│       ├── templates/ # Thymeleaf 템플릿
+│       ├── static/ # 정적 리소스
+│       │   ├── css/ # 스타일
+│       │   ├── js/ # JS 모듈
+│       │   └── file/ # 이미지, 음악 리소스
+│       └── mapper/ # MyBatis XML
 └── build.gradle```
