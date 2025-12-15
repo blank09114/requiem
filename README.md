@@ -90,4 +90,4 @@ infected-requiem/
 │       │   ├── js/ # JS 모듈
 │       │   └── file/ # 이미지, 음악 리소스
 │       └── mapper/ # MyBatis XML
-└── build.gradle```
+└── build.gradle
